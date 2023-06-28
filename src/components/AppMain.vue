@@ -16,7 +16,7 @@ export default {
 <template lang="">
   <div>
     <div v-for="result in store.results" :key="result.id">
-      <img :src="`https://image.tmdb.org/t/p/w500${result.poster_path}`" v-if="result.poster_path !== null" >
+      <img :src="`https://image.tmdb.org/t/p/${store.w500}${result.poster_path}`" v-if="result.poster_path !== null" >
       <img src="/no_poster.jpg" v-if="result.poster_path == null" class="no_poster">
       <p>titolo: {{result.title}}</p>
       <p>titolo originale: {{result.original_title}}</p>  
@@ -28,7 +28,10 @@ export default {
       <span v-if="result.original_language == 'ja'"><Icon icon="flagpack:jp"/></span>
       <span v-if="result.original_language == 'ko'"><Icon icon="flagpack:kr"/></span>
       <span v-if="result.original_language == 'hi' || result.original_language == 'te'"><Icon icon="flagpack:in"/></span>
-      <p>voto: {{result.vote_average}}</p>
+      <p>voto: 
+        <font-awesome-icon :icon="['fas', 'star']" v-for="n in Math.floor(result.vote_average /2)" style="color:#FFDF00;" />
+        <font-awesome-icon :icon="['far', 'star']" v-for="n in (5-(Math.floor(result.vote_average /2)))" />
+      </p>
     </div>
   </div>
 </template>
