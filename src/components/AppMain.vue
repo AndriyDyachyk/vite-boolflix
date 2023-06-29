@@ -11,34 +11,26 @@ export default {
       store,
       
     }
-  },
-  /*
-  methods:{
-    mouseOver: function(){
-      const element=document.querySelector('.card_content');
-      element.classList.toggle('display_none');
-      element.classList.toggle('display_inline_flex');
-    }
-  }*/
+  }
 }
 </script>
 <template lang="">
   <main>
     <div class="card" v-for="result in store.results" :key="result.id">
-      <img :src="`https://image.tmdb.org/t/p/${store.w342}${result.poster_path}`" v-if="result.poster_path !== null" v-on:mouseover="mouseOver" v-on:mouseleave="mouseOver">
-      <img src="/no_poster.jpg" v-if="result.poster_path == null" class="no_poster" @mouseover="mouseOver" >
+      <img :src="`https://image.tmdb.org/t/p/${store.w342}${result.poster_path}`" v-if="result.poster_path !== null">
+      <img src="/no_poster.jpg" v-if="result.poster_path == null" class="no_poster">
       <div class="card_content display">
         <div class="content">
-          <p>Titolo:<br><strong>{{result.title}}</strong></p>
+          <p><strong>{{result.title}}</strong></p>
           <p>Titolo originale:<br>{{result.original_title}}</p>  
           <!-- bandiera lingua -->
           <span v-if="result.original_language !== 'en' && result.original_language !== 'ja' && result.original_language !== 'ko' && result.original_language !== 'hi' && result.original_language !== 'te'">
-            <Icon :icon="`flagpack:${result.original_language}`"/>
+            <Icon :icon="`flagpack:${result.original_language}`" width="40" height="30"/>
           </span>
-          <span v-if="result.original_language == 'en'"><Icon icon="flagpack:gb-ukm"/></span>
-          <span v-if="result.original_language == 'ja'"><Icon icon="flagpack:jp"/></span>
-          <span v-if="result.original_language == 'ko'"><Icon icon="flagpack:kr"/></span>
-          <span v-if="result.original_language == 'hi' || result.original_language == 'te'"><Icon icon="flagpack:in"/></span>
+          <span v-if="result.original_language == 'en'"><Icon icon="flagpack:gb-ukm" width="40" height="30"/></span>
+          <span v-if="result.original_language == 'ja'"><Icon icon="flagpack:jp" width="40" height="30"/></span>
+          <span v-if="result.original_language == 'ko'"><Icon icon="flagpack:kr" width="40" height="30"/></span>
+          <span v-if="result.original_language == 'hi' || result.original_language == 'te'"><Icon icon="flagpack:in" width="40" height="30"/></span>
           <!-- fine bandiera lingua -->
           <p>Voto: 
             <font-awesome-icon :icon="['fas', 'star']" v-for="n in Math.floor(result.vote_average /2)" style="color:#FFDF00;" />
@@ -92,11 +84,14 @@ export default {
     background: -webkit-linear-gradient(180deg, rgba(255,255,255,0) 9%, rgba(0,0,0,1) 87%);
     background: linear-gradient(180deg, rgba(255,255,255,0) 9%, rgba(0,0,0,1) 87%);
   }
+  .content p, .content span{
+    margin-bottom: 10px;
+  }
   p strong{
     font-size: 20px;
   }
 
-  .content p:last-of-type{
+  .content p:last-of-type,.descrizione strong {
     font-size: 14px;
   }
 
