@@ -3,6 +3,7 @@ import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 import { store } from './store.js'
 import axios from 'axios'
+import general from './style/general.scss'
 export default {
   components:{
     AppHeader,
@@ -19,10 +20,8 @@ export default {
 }
 </script>
 <template lang="">
-  <div>
-    <AppHeader/>
-    <AppMain/>
-  </div>
+  <AppHeader/>
+  <AppMain/>
 </template>
 <style lang="scss">
   

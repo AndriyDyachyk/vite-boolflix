@@ -6,6 +6,7 @@ export default {
  data () {
  return {
   query: '',
+  activeSearch: 'false',
 }
  },
  mounted() {
@@ -48,13 +49,57 @@ export default {
     };
     axios.request(optionPopular).then(popularResponse => { store.results = popularResponse.data.results})
      console.log(store.results);
+     
+  },
+  transform(){
+    if(this.activeSearch== 'false'){
+      document.getElementById("search_bar").classList.toggle('transform');
+      document.getElementById("search_bar").classList.toggle('transform-active');
+    } else{
+      document.getElementById("search_bar").classList.toggle('transform');
+      document.getElementById("search_bar").classList.toggle('transform-active');
+    }
+    console.log(this.activeSearch)
   }
-
  }
 }
 </script>
 <template>
+    <div class="search_button" v-on:click="transform()">
+        <font-awesome-icon :icon="['fas', 'magnifying-glass']" style="color: #ffffff;" />
+    </div>
     <div class="search">
-        <input type='text' v-model='query' @keyup='getResult(query)'>
+        <input type='text' id="search_bar" v-model='query' @keyup.enter='getResult(query)' class="transform">
     </div>
 </template>
+<style lang="scss" scoped> 
+  .search_button{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search_button:hover{
+    border: 1px solid white;
+  }
+  .transform {
+    height: 30px;
+    width: 0px;
+    border: none;
+    -webkit-transition: all 1s ease;  
+    -moz-transition: all 1s ease;  
+    -o-transition: all 1s ease;  
+    -ms-transition: all 1s ease;  
+    transition: all 1s ease;
+ }
+ .transform-active {
+    width: 200px;
+    height: 30px;
+    -webkit-transition: all 1s ease;  
+    -moz-transition: all 1s ease;  
+    -o-transition: all 1s ease;  
+    -ms-transition: all 1s ease;  
+    transition: all 1s ease;
+  }
+</style>
